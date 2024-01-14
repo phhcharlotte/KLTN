@@ -1,0 +1,24 @@
+.login{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__wrapper{
+        background-color: #9152f8;
+        width: 400px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h1{
+            font-size: $app-font-size-xxlarge;
+            text-align: center;
+            margin: 20px 0 50px 0;
+        }
+    }
+    &__form{
+        width: 100%;
+        margin: 30px 0;
+    }
+}

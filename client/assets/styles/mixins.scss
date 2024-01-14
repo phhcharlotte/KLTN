@@ -1,0 +1,21 @@
+@mixin paragraph {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-size: $app-font-size;
+}
+
+@mixin company-infor-detail-form {
+  .app-form-item {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+
+    &__controller {
+      background-color: white;
+    }
+  }
+
+  .app-form-item:last-child {
+    border-bottom: 0;
+  }
+}

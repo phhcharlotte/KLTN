@@ -1,0 +1,46 @@
+.app-modal {
+    &.ant-modal {
+      width: 80%;
+      max-width: 1000px;
+    }
+  
+    .ant-modal-body {
+      padding: 0;
+    }
+  
+    &__header {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      background-color: #f6f6fa;
+    }
+  
+    &__modal-name {
+      font-size: $app-font-size-medium;
+    }
+  
+    &__header-cancel-btn {
+      font-size: $app-font-size-large;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      margin-left: auto;
+  
+      &:hover {
+        &.ant-btn-text {
+          background: transparent;
+        }
+      }
+  
+      > span {
+        color: $error-text-color;
+      }
+    }
+  
+    &__body {
+      min-height: 300px;
+      background-color: white;
+      width: 100%;
+    }
+  }
+  

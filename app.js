@@ -1,5 +1,6 @@
-const express = require("express");
+require("dotenv").config();
 
+const express = require("express");
 const authRotuer = require("./routes/auth");
 
 const checkAdminMiddleware = require("./middleware/checkAdmin");
@@ -16,7 +17,8 @@ app.use(express.json());
 
 app.use("api/auth", authRotuer);
 
-app.get("/", checkAdminMiddleware, (req, res) => {
+app.get("/", (req, res) => {
+  console.log(123);
   res.send("Hello World!");
 });
 app.listen(port, () => {

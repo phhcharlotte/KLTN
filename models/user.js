@@ -1,79 +1,43 @@
-var mongoose = require("mongoose")
-const argon2 = require("argon2")
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
-var UserChema = new mongoose.Schema(
-  {
-    email: {
-      unique: true,
-      type: String,
-      required: true,
-      trim: true,
-    },
-    fullName: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      enum: ["USER", "ADMIN"],
-      default: "USER",
-    },
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    lowercase: true,
+    unique: true,
   },
-  {
-    timestamps: true,
-  }
-)
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-//authenticate input against database
-UserChema.statics.authenticate = async function (username, password, callback) {
+UserSchema.pre("save", async function (next) {
   try {
-    await User.findOne({username: username}).exec(function (err, user) {
-      if (err) {
-        return callback(err)
-      } else if (!user) {
-        const err = {
-          statusCode: 400,
-          status: "USER_NOT_FOUND",
-          message: "User not found",
-        }
-        return callback(err)
-      }
-      argon2
-        .verify(user.password, password)
-        .then((result) => {
-          return callback(null, user)
-        })
-        .catch((error) => {
-          console.log(">>> / file: user.model.js / line 62 / error", error)
-          const err = {
-            statusCode: 400,
-            status: "ERROR_PASSWORD",
-            message: "error password",
-          }
-          return callback(err)
-        })
-    })
+    /* 
+    Here first checking if the document is new by using a helper of mongoose .isNew, therefore, this.isNew is true if document is new else false, and we only want to hash the password if its a new document, else  it will again hash the password if you save the document again by making some changes in other fields incase your document contains other fields.
+    */
+    if (this.isNew) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      this.password = hashedPassword;
+    }
+    next();
   } catch (error) {
-    res.status(401).send({success: false, message: error.message})
+    next(error);
   }
-}
-// hash password before save
-UserChema.pre("save", function (next) {
-  var user = this
-  argon2
-    .hash(user.password)
-    .then((hashedPassword) => {
-      user.password = hashedPassword
-      next()
-    })
-    .catch((err) => {
-      return next(err)
-    })
-})
+});
 
-var User = mongoose.model("users", UserChema)
-module.exports = User
+UserSchema.methods.isValidPassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const User = mongoose.model("user", UserSchema);
+module.exports = User;

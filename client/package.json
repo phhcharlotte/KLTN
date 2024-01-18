@@ -15,9 +15,14 @@
     "sass": "^1.68.0",
     "sass-loader": "^13.3.2"
   },
+  "overrides": {
+    "vue": "latest"
+  },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",
+    "@pinia/nuxt": "^0.5.1",
     "ant-design-vue": "^4.0.3",
-    "unplugin-vue-components": "^0.25.2"
+    "axios": "^1.6.5",
+    "pinia": "^2.1.7"
   }
 }

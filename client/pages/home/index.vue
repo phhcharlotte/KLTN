@@ -5,7 +5,13 @@
       <a-button type="primary">Search</a-button>
       <a-button type="primary" @click="handleForm">Đăng ký đề tài</a-button>
     </div>
-    <a-table :columns="columns" :data-source="data"> </a-table>
+    <a-table :columns="columns" :data-source="data">
+      <template #bodyCell="{ column, text }">
+        <template v-if="column.dataIndex === 'name'">
+          <a>{{ text }}</a>
+        </template>
+      </template>
+    </a-table>
     <modal-form-register v-if="isOpen" @close="closeModal" />
   </div>
 </template>
@@ -17,58 +23,61 @@ const isOpen = ref(false);
 const columns = [
   {
     title: "MGV",
-    dataIndex: "mgv",
-    key: "mgv",
+    dataIndex: "name",
+    key: "name",
     width: 80,
   },
   {
     title: "Tên giáo viên hướng dẫn",
-    dataIndex: "tearch_name",
-    key: "tearch_name",
+    dataIndex: "age",
+    key: "age",
   },
   {
     title: "Đề tài",
-    dataIndex: "topic",
-    key: "topic",
+    dataIndex: "address",
+    key: "address 1",
     ellipsis: true,
   },
   {
     title: "Số lượng SV/đề tài",
-    dataIndex: "total",
-    key: "total",
+    dataIndex: "address",
+    key: "address 2",
     ellipsis: true,
   },
   {
     title: "Đã đăng ký đề tài",
-    dataIndex: "registered",
-    key: "registered",
+    dataIndex: "address",
+    key: "address 3",
     ellipsis: true,
   },
   {
     title: "Đã được đồng ý",
-    dataIndex: "accepted",
-    key: "accepted",
+    dataIndex: "address",
+    key: "address 4",
     ellipsis: true,
   },
 ];
 const data = [
   {
     key: "1",
-    mgv: "MT2",
-    tearch_name: "Phạm Huy Hoàng",
-    topic: "Quảng lý KLTN",
-    total: 4,
-    registered: 10,
-    accepted: 3,
+    name: "MT2",
+    age: 32,
+    address: "New York No. 1 Lake Park, New York No. 1 Lake Park",
+    tags: ["nice", "developer"],
   },
   {
-    key: "1",
-    mgv: "MT2",
-    tearch_name: "Phạm Huy Hoàng",
-    topic: "Quảng lý KLTN",
-    total: 4,
-    registered: 10,
-    accepted: 3,
+    key: "2",
+    name: "MV3",
+    age: 42,
+    address: "London No. 2 Lake Park, London No. 2 Lake Park",
+    tags: ["loser"],
+  },
+  {
+    key: "3",
+    name: "DC4",
+    age: 32,
+    address: "Sidney No. 1 Lake Park, Sidney No. 1 Lake Park",
+    tags: ["cool", "teacher"],
   },
 ];
 const handleForm = () => {

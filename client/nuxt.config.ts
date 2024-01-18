@@ -1,9 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  modules: ['./modules/antd'],
-  css: ['@/assets/styles/index.scss'],
+  devtools: {
+    enabled: true,
+    disable: ["performance", "network"],
+  },
+  modules: ["./modules/antd", "@pinia/nuxt"],
+  css: ["@/assets/styles/index.scss"],
   vite: {
     css: {
       preprocessorOptions: {
@@ -17,4 +20,4 @@ export default defineNuxtConfig({
       },
     },
   },
-})
+});

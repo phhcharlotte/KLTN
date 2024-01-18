@@ -1,0 +1,18 @@
+.topic {
+  &__title {
+    font-size: $app-font-size-medium;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  main {
+    .text {
+      margin-top: 20px;
+    }
+  }
+  &__table {
+    margin-top: 20px;
+    button {
+      color: #fff;
+    }
+  }
+}

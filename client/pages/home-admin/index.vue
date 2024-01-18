@@ -12,7 +12,7 @@
         </template>
       </template>
     </a-table>
-    <modal-form-register v-if="isOpen" @close="closeModal" />
+    <modal-topic v-if="isOpen" @close="closeModal" />
   </div>
 </template>
 <script setup>
@@ -78,10 +78,7 @@ const closeModal = () => {
 const customRow = (record, index) => {
   return {
     onClick: () => {
-      return navigateTo({
-        name: "home-admin/[id]",
-      });
-      console.log("record:", record, `点了第${index}行`);
+      console.log(123);
     },
   };
 };

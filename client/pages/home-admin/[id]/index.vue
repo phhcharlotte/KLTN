@@ -5,7 +5,11 @@
     </div>
     <main>
       <p class="text">Số sinh viên đã đăng kí:</p>
-      <a-table :columns="columns" :data-source="data" class="topic__table">
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="false"
+        class="topic__table">
         <template #bodyCell="{ column, text }">
           <template v-if="column.dataIndex === 'detail'">
             <div>

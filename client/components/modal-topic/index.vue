@@ -11,24 +11,30 @@
       @finish="onFinish">
       <a-form-item
         :name="['user', 'name']"
-        label="Name"
+        label="Đề tài"
         :rules="[{ required: true }]">
         <a-input v-model:value="formState.user.name" />
       </a-form-item>
       <a-form-item
         :name="['user', 'email']"
-        label="Email"
+        label="Sô lương SV"
         :rules="[{ type: 'email', required: true }]">
-        <a-input v-model:value="formState.user.email" />
+        <a-input-number v-model:value="formState.user.email" />
       </a-form-item>
       <a-form-item
-        :name="['user', 'age']"
-        label="Mã Sinh Viên"
+        :name="['user', 'value1']"
+        label="Khoa"
         :rules="[{ required: true }]">
-        <a-input v-model:value="formState.user.age" />
-      </a-form-item>
-      <a-form-item :name="['user', 'website']" label="Bảng Điểm">
-        upload
+        <a-select
+          ref="select"
+          v-model:value="formState.user.value1"
+          style="width: 120px"
+          @change="handleChange">
+          <a-select-option value="jack">Jack</a-select-option>
+          <a-select-option value="lucy">Lucy</a-select-option>
+          <a-select-option value="disabled" disabled>Disabled</a-select-option>
+          <a-select-option value="Yiminghe">yiminghe</a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
         <div class="footer">
@@ -68,7 +74,7 @@ const validateMessages = {
 const formState = reactive({
   user: {
     name: "",
-    age: "",
+    value1: "",
     email: "",
     website: "",
     introduction: "",
@@ -76,6 +82,9 @@ const formState = reactive({
 });
 const onFinish = (values) => {
   console.log("Success:", values);
+};
+const handleChange = (value) => {
+  console.log(`selected ${value}`);
 };
 </script>
 

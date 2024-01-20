@@ -20,6 +20,7 @@ definePageMeta({
   layout: "sivbar",
 });
 const isOpen = ref(false);
+const router = useRouter();
 const columns = [
   {
     title: "STT",
@@ -78,7 +79,12 @@ const closeModal = () => {
 const customRow = (record, index) => {
   return {
     onClick: () => {
-      console.log(123);
+      router.push({
+        name: "home-admin-id",
+        params: {
+          id: 123,
+        },
+      });
     },
   };
 };

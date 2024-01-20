@@ -11,7 +11,7 @@ var RegisterTopicSchema = new mongoose.Schema({
     require: true,
     trim: true,
   },
-  name_teacher: {
+  teacher_name: {
     type: String,
     required: true,
   },

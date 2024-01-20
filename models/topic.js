@@ -24,6 +24,10 @@ var TopicSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  created_at: {
+    type: String,
+    default: "",
+  },
 });
 
 module.exports = mongoose.model("topic", TopicSchema);

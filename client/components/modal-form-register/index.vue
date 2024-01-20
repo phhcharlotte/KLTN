@@ -10,24 +10,27 @@
       :validate-messages="validateMessages"
       @finish="onFinish">
       <a-form-item
-        :name="['user', 'name']"
-        label="Name"
+        :name="['user', 'student_name']"
+        label="Họ và tên"
         :rules="[{ required: true }]">
-        <a-input v-model:value="formState.user.name" />
+        <a-input v-model:value="formState.user.student_name" />
       </a-form-item>
       <a-form-item
-        :name="['user', 'email']"
-        label="Email"
-        :rules="[{ type: 'email', required: true }]">
-        <a-input v-model:value="formState.user.email" />
-      </a-form-item>
-      <a-form-item
-        :name="['user', 'age']"
+        :name="['user', 'msv']"
         label="Mã Sinh Viên"
-        :rules="[{ required: true }]">
-        <a-input v-model:value="formState.user.age" />
+        :rules="[{ type: 'msv', required: true }]">
+        <a-input v-model:value="formState.user.msv" />
       </a-form-item>
-      <a-form-item :name="['user', 'website']" label="Bảng Điểm">
+      <a-form-item
+        :name="['user', 'teacher_name']"
+        label="GV hướng dẫn"
+        :rules="[{ required: true }]">
+        <a-input v-model:value="formState.user.teacher_name" />
+      </a-form-item>
+      <a-form-item
+        :name="['user', 'topic']"
+        label="Đề tài"
+        :rules="[{ required: true }]">
         upload
       </a-form-item>
       <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
@@ -58,7 +61,7 @@ const layout = {
 const validateMessages = {
   required: "${label} is required!",
   types: {
-    email: "${label} is not a valid email!",
+    teacher_name: "${label} is not a valid teacher_name!",
     number: "${label} is not a valid number!",
   },
   number: {
@@ -67,9 +70,9 @@ const validateMessages = {
 };
 const formState = reactive({
   user: {
-    name: "",
-    age: "",
-    email: "",
+    student_name: "",
+    teacher_name: "",
+    msv: "",
     website: "",
     introduction: "",
   },

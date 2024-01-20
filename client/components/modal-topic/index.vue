@@ -10,16 +10,16 @@
       :validate-messages="validateMessages"
       @finish="onFinish">
       <a-form-item
-        :name="['user', 'name']"
+        :name="['user', 'topic']"
         label="Đề tài"
         :rules="[{ required: true }]">
-        <a-input v-model:value="formState.user.name" />
+        <a-input v-model:value="formState.user.topic" />
       </a-form-item>
       <a-form-item
-        :name="['user', 'email']"
+        :name="['user', 'total']"
         label="Sô lương SV"
-        :rules="[{ type: 'email', required: true }]">
-        <a-input-number v-model:value="formState.user.email" />
+        :rules="[{ type: 'total', required: true }]">
+        <a-input v-model:value="formState.user.total" type="number" />
       </a-form-item>
       <a-form-item
         :name="['user', 'value1']"
@@ -29,12 +29,8 @@
           ref="select"
           v-model:value="formState.user.value1"
           style="width: 120px"
-          @change="handleChange">
-          <a-select-option value="jack">Jack</a-select-option>
-          <a-select-option value="lucy">Lucy</a-select-option>
-          <a-select-option value="disabled" disabled>Disabled</a-select-option>
-          <a-select-option value="Yiminghe">yiminghe</a-select-option>
-        </a-select>
+          :options="options"
+          @change="handleChange" />
       </a-form-item>
       <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
         <div class="footer">
@@ -48,8 +44,17 @@
 
 <script setup>
 const visible = true;
-const fileList = ref([]);
 const emits = defineEmits(["close"]);
+const options = ref([
+  {
+    value: 1,
+    label: "hello",
+  },
+  {
+    value: 2,
+    label: "hihii",
+  },
+]);
 
 const onCloseModal = () => emits("close");
 import { reactive } from "vue";
@@ -73,9 +78,9 @@ const validateMessages = {
 };
 const formState = reactive({
   user: {
-    name: "",
+    topic: "",
     value1: "",
-    email: "",
+    total: "",
     website: "",
     introduction: "",
   },

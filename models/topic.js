@@ -17,8 +17,8 @@ var TopicSchema = new mongoose.Schema({
   },
   accepted: {
     type: String,
-    enum: ["USER", "ADMIN"],
-    default: "USER",
+    enum: ["STUDENT", "TEACHER"],
+    default: "STUDENT",
   },
   created_by: {
     type: String,

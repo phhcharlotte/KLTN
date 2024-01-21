@@ -12,7 +12,7 @@
         </template>
       </template>
     </a-table>
-    <div>
+    <div class="pagination">
       <a-pagination show-less-items @change="onChangePagin" />
     </div>
     <modal-form-register v-if="isOpen" @close="closeModal" />
@@ -51,19 +51,19 @@ const columns = [
     title: "Số lượng SV/đề tài",
     dataIndex: "total",
     key: "total",
-    width: 80,
+    width: 120,
   },
   {
     title: "Đã đăng ký đề tài",
     dataIndex: "registed",
     key: "registed",
-    width: 80,
+    width: 120,
   },
   {
     title: "Đã được đồng ý",
     dataIndex: "agreed",
     key: "agreed",
-    width: 80,
+    width: 120,
   },
 ];
 const data = [

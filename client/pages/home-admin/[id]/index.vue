@@ -18,6 +18,9 @@
           </template>
         </template>
       </a-table>
+      <div class="pagination">
+        <a-pagination show-less-items @change="onChangePagin" />
+      </div>
     </main>
   </div>
 </template>

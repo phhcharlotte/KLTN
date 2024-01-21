@@ -1,11 +1,15 @@
 require("dotenv").config();
 
+const cors = require("cors");
 const express = require("express");
-const authRotuer = require("./routes/auth");
 
 const checkAdminMiddleware = require("./middleware/checkAdmin");
 const logMiddleware = require("./middleware/log");
 const { connect } = require("./config/mongodb");
+
+const authRotuer = require("./routes/auth");
+const topicRotuer = require("./routes/topic");
+
 const app = express();
 const port = 3000;
 
@@ -15,8 +19,11 @@ connect();
 //middleware
 app.use(logMiddleware);
 app.use(express.json());
+app.use(cors());
 
 app.use("api/auth", authRotuer);
+app.use("api/topic", topicRotuer);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

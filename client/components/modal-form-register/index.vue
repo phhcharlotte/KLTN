@@ -23,15 +23,21 @@
       </a-form-item>
       <a-form-item
         :name="['user', 'teacher_name']"
+        label="Khoa"
+        :rules="[{ required: true }]">
+        <a-select />
+      </a-form-item>
+      <a-form-item
+        :name="['user', 'teacher_name']"
         label="GV hướng dẫn"
         :rules="[{ required: true }]">
-        <a-input v-model:value="formState.user.teacher_name" />
+        <a-select />
       </a-form-item>
       <a-form-item
         :name="['user', 'topic']"
         label="Đề tài"
         :rules="[{ required: true }]">
-        upload
+        <a-select />
       </a-form-item>
       <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
         <div class="footer">

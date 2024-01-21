@@ -1,54 +1,32 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const express = require("express");
-const auth = require("../middleware/auth");
-const userSchema = require("../models/user");
-
+const UserController = require("../controllers/auth");
 const router = express.Router();
-const ABC = "heheh";
-const EXPIRE_In = "123";
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+// @route     GET /api/v1/students
+// @desc      Get all students
+// @access    admin
+router.get("/", UserController.fetchAllStudents);
 
-  const existingUser = await userSchema.findOne({ email });
-  if (!existingUser) {
-    return res.status(400).json({
-      msg: "invalid",
-    });
-  }
+// @route     GET /api/v1/students/:id
+// @desc      Get a student by id
+// @access    admin
+router.get("/:id", UserController.fetchStudent);
 
-  const isMatchPass = await bcrypt.compare(password, existingUser.password);
-  if (!isMatchPass) {
-    return res.status(400).json({
-      msg: "invalid",
-    });
-  }
+// @route     POST /api/v1/students
+// @desc      Create new student
+// @access    Public
+router.post("/", UserController.createStudent);
 
-  delete existingUser.password;
+// @route     PUT /api/v1/students
+// @desc      Update a student by id
+// @access    Public
+router.put("/:id", UserController.updateStudent);
 
-  const payload = { ...existingUser };
+// @route     DELETE /api/v1/students
+// @desc      Delete a student by id
+// @access    Public
+router.delete("/:id", UserController.deleteStudent);
 
-  const token = jwt.sign(payload, ABC, {
-    expiresIn: EXPIRE_In,
-  });
-
-  return res.json({
-    isAuthenticated: true,
-    accessToken: token,
-  });
-  // try {
-  //   const user = await userSchema.findByCredentials(email, password);
-  //   if (!user) {
-  //     return res
-  //       .status(401)
-  //       .send({ error: "Login failed! Check authentication credentials" });
-  //   }
-  //   const token = await user.generateAuthToken();
-  //   res.send({ user, token });
-  // } catch (error) {
-  //   res.status(400).send(error);
-  // }
-});
+router.post("/login", UserController.login);
 
 module.exports = router;

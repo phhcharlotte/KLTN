@@ -2,8 +2,8 @@
   <div class="list-topic">
     <div class="list-topic__search">
       <a-input placeholder="Nhập tên tên giáo viên ..." />
-      <a-button type="primary">Search</a-button>
-      <a-button type="primary" @click="handleForm">Đăng ký đề tài</a-button>
+      <app-button type="primary">Search</app-button>
+      <app-button type="primary" @click="handleForm">Đăng ký đề tài</app-button>
     </div>
     <a-table :columns="columns" :data-source="data" :pagination="false">
       <template #bodyCell="{ column, text }">

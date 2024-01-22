@@ -1,0 +1,120 @@
+@mixin buttonSize($width, $height, $fontSize) {
+    width: $width;
+    height: $height;
+    font-size: $fontSize;
+  }
+  
+  .app-button {
+    border-radius: 24px;
+    color: white;
+    // border: 1px solid $button-border-color;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    letter-spacing: 2px;
+    text-indent: 2px;
+    $self: &;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  
+    &--primary,
+    &--primary-cancel {
+      background-color: $button-primary;
+      font-size: $app-font-size;
+      border-radius: 8px;
+    }
+  
+    &--primary-cancel {
+      background-color: $button-cancel;
+    }
+  
+    &--primary,
+    &--primary-cancel {
+      outline: none;
+  
+      &#{ $self }--small {
+        @include buttonSize(auto, auto, 10px);
+        padding: 10px;
+      }
+      &#{ $self }--medium {
+        @include buttonSize(150px, 35px, 12px);
+        padding: 10px;
+      }
+  
+      &#{ $self }--large {
+        @include buttonSize(200px, 40px, 14px);
+        padding: 10px;
+      }
+    }
+    &--medium {
+      height: 46px;
+      width: 200px;
+      font-size: $app-font-size-large;
+    }
+    &:not(.app-button--loading):not(.app-button--text):disabled {
+      background-color: #c9caca;
+      background-image: none;
+      border-color: #c9caca;
+      cursor: not-allowed;
+    }
+  
+    &--loading {
+      position: relative;
+      overflow: hidden;
+      opacity: 0.8;
+      cursor: not-allowed;
+  
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(#fff, 0) 0,
+          rgba(#fff, 0.2) 20%,
+          rgba(#fff, 0.5) 60%,
+          rgba(#fff, 0)
+        );
+        animation: shimmer 2s infinite;
+        content: "";
+      }
+  
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+    }
+  
+    &--small {
+      border-radius: 12px;
+      width: 90px;
+      height: 40px;
+      font-size: $app-font-size-small;
+    }
+  
+    &--large {
+      height: 56px;
+      width: 260px;
+      font-size: $app-font-size-large;
+    }
+  
+    &--text {
+      background-color: transparent;
+      height: fit-content;
+      width: fit-content;
+      font-size: $app-font-size-medium;
+      // color: $_2light-text-color;
+  
+      &:disabled {
+        // color: $button-disabled-text-color;
+        cursor: not-allowed;
+      }
+    }
+  }
+  

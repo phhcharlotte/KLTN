@@ -1,15 +1,14 @@
 const express = require("express");
+const TopicController = require("../controllers/topicController");
 
 const router = express.Router();
 
-router.get("/all-topic", (req, res) => {
-  res.send("123123123123");
-});
+router.get("/all-topic", TopicController.getAllTopic);
 
-router.post("/", (req, res) => {});
+router.post("/", TopicController.createTopic);
 
-router.put("/:id", (req, res) => {});
+router.put("/:id", TopicController.updateTopic);
 
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", TopicController.deleteTopic);
 
 module.exports = router;

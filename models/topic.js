@@ -8,25 +8,24 @@ var TopicSchema = new mongoose.Schema({
     trim: true,
   },
   total: {
-    type: String,
+    type: Number,
     required: true,
   },
   registered: {
-    type: String,
-    required: true,
+    type: Number,
+    default: "",
   },
   accepted: {
-    type: String,
-    enum: ["STUDENT", "TEACHER"],
-    default: "STUDENT",
+    type: Number,
+    default: "",
   },
   created_by: {
     type: String,
     default: "",
   },
   created_at: {
-    type: String,
-    default: "",
+    type: Date,
+    default: Date.now,
   },
 });
 

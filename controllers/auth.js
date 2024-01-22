@@ -57,7 +57,7 @@ const fetchStudent = async (req, res) => {
   }
 };
 
-const createStudent = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
     const existingUser = await UserModel.findOne({ username });
@@ -124,40 +124,18 @@ const updateStudent = async (req, res) => {
   }
 };
 
-const deleteStudent = async (req, res) => {
-  try {
-    const { id } = req.params;
-    // const isValid = validationMongoId(id);
-    // if (!isValid) {
-    //   res.status(404).json({
-    //     message: "Id is valid",
-    //   });
-    // }
-
-    await UserModel.findByIdAndDelete(id);
-
-    res.json({
-      message: "Success",
-    });
-  } catch (error) {
-    res.status(400).json({
-      message: error.toString(),
-    });
-  }
-};
-
 const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   // Validation
-  if (!username || !password) {
+  if (!email || !password) {
     return res.status(400).json({
       msg: "Missing require keys",
     });
   }
 
   // Check isExist user
-  const existingUser = await UserModel.findOne({ username });
+  const existingUser = await UserModel.findOne({ email });
   if (!existingUser) {
     return res.status(400).json({
       msg: "Invalid credentials",
@@ -174,7 +152,7 @@ const login = async (req, res) => {
 
   const payload = {
     id: existingUser._id,
-    username: existingUser.username,
+    email: existingUser.email,
     role: existingUser.role,
   };
 
@@ -190,8 +168,7 @@ const login = async (req, res) => {
 module.exports = {
   fetchAllStudents,
   fetchStudent,
-  createStudent,
+  createUser,
   updateStudent,
-  deleteStudent,
   login,
 };

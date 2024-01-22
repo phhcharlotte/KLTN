@@ -10,19 +10,14 @@ const props = defineProps({
     type: [String, Array],
     default: "primary",
     validator(value) {
-      return [
-        "primary",
-        "detail",
-        "primary-cancel",
-        "delete",
-      ].includes(value);
+      return ["primary", "detail", "primary-cancel", "delete"].includes(value);
     },
   },
   size: {
     type: String,
     default: "medium",
     validator(value) {
-      return ["medium", "small", "large", ""].includes(value);
+      return ["medium", "large", ""].includes(value);
     },
   },
   loading: {

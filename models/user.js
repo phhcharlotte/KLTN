@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  msv: {
+  ms: {
     type: String,
     required: true,
   },
@@ -21,26 +21,56 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    default: "student",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-// userSchema.pre("save", async function (next) {
-//   // Hash the password before saving the user model
-//   const user = this;
-//   if (user.isModified("password")) {
-//     user.password = await bcrypt.hash(user.password, 8);
-//   }
-//   next();
-// });
+userSchema.pre("save", async function (next) {
+  // Hash the password before saving the user model
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
 
-// userSchema.methods.generateAuthToken = async function () {
-//   // Generate an auth token for the user
-//   const user = this;
-//   const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY);
-//   user.tokens = user.tokens.concat({ token });
-//   await user.save();
-//   return token;
-// };
+// Return JWT token
+userSchema.methods.getJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRE_IN,
+  });
+};
 
+userSchema.methods.generateAuthToken = async function () {
+  // Generate an auth token for the user
+  const user = this;
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY);
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+  return token;
+};
+
+userSchema.methods.getResetPasswordToken = function () {
+  // Generate token
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  // Hash and set to resetPasswordToken
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  // Set token expire time
+  this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
+
+  return resetToken;
+};
 // userSchema.methods.findByCredentials = async (email, password) => {
 //   // Search for a user by email and password.
 //   const user = await User.findOne({ "user.email": email });

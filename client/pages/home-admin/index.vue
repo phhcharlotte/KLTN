@@ -18,11 +18,15 @@
         </template>
         <template v-if="column.dataIndex === 'action'">
           <div class="table-topic__button">
-            <app-button type="primary" @click="openDetail" class="btn"
+            <app-button type="detail" @click="openDetail" class="btn"
               >Chi tiết</app-button
             >
             <app-button type="primary" class="btn">Edit</app-button>
-            <app-button type="primary" danger @click="openModalDelete" class="btn"
+            <app-button
+              type="delete"
+              danger
+              @click="openModalDelete"
+              class="btn"
               >Delete</app-button
             >
           </div>

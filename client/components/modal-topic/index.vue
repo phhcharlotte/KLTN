@@ -34,8 +34,8 @@
       </a-form-item>
       <a-form-item :wrapper-col="{ ...layout.wrapperCol, offset: 8 }">
         <div class="footer">
-          <a-button type="primary" html-type="submit">Đăng ký</a-button>
-          <a-button type="primary" @click="onCloseModal">Huỷ bỏ</a-button>
+          <app-button type="primary" html-type="submit">Đăng ký</app-button>
+          <app-button type="primary" @click="onCloseModal">Huỷ bỏ</app-button>
         </div>
       </a-form-item>
     </a-form>

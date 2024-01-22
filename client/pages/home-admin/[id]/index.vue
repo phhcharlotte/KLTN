@@ -13,7 +13,7 @@
         <template #bodyCell="{ column, text }">
           <template v-if="column.dataIndex === 'detail'">
             <div>
-              <a-button type="primary" @click="openDetail">Chi tiết</a-button>
+              <app-button type="primary" @click="openDetail">Chi tiết</app-button>
             </div>
           </template>
         </template>

@@ -2,8 +2,8 @@
   <div class="list-topic">
     <div class="list-topic__search">
       <a-input placeholder="Nhập tên tên giáo viên ..." />
-      <a-button type="primary">Search</a-button>
-      <a-button type="primary" @click="handleForm">Đăng ký đề tài</a-button>
+      <app-button type="primary">Search</app-button>
+      <app-button type="primary" @click="handleForm">Đăng ký đề tài</app-button>
     </div>
     <a-table
       :columns="columns"
@@ -18,12 +18,12 @@
         </template>
         <template v-if="column.dataIndex === 'action'">
           <div class="table-topic__button">
-            <a-button type="primary" @click="openDetail" class="btn"
-              >Chi tiết</a-button
+            <app-button type="primary" @click="openDetail" class="btn"
+              >Chi tiết</app-button
             >
-            <a-button type="primary" class="btn">Edit</a-button>
-            <a-button type="primary" danger @click="openModalDelete" class="btn"
-              >Delete</a-button
+            <app-button type="primary" class="btn">Edit</app-button>
+            <app-button type="primary" danger @click="openModalDelete" class="btn"
+              >Delete</app-button
             >
           </div>
         </template>

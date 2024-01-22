@@ -4,8 +4,8 @@
       <div class="header">Bạn có chắc chắn muốn xoá hay không</div>
     </template>
     <div class="content">
-      <a-button @click="onCloseModal">Huỷ bỏ</a-button>
-      <a-button @click="deleteItem">Xoá</a-button>
+      <app-button @click="onCloseModal">Huỷ bỏ</app-button>
+      <app-button @click="deleteItem">Xoá</app-button>
     </div>
   </a-modal>
 </template>

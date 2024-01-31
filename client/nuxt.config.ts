@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1",
     },
   },
+  plugins: ["@/plugins/api", "@/plugins/constants", "@/plugins/models"],
   modules: ["./modules/antd", "@pinia/nuxt"],
   css: ["@/assets/styles/index.scss"],
   vite: {

@@ -18,3 +18,14 @@ export const MenuTeacher = [
     label: "",
   },
 ];
+
+export const MenuAdmin = [
+  {
+    key: "1",
+    label: "Đăng đề tài ",
+  },
+  {
+    key: "2",
+    label: "",
+  },
+];

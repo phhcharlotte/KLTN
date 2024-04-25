@@ -6,7 +6,7 @@ type FieldType = {
   username?: string;
   password?: string;
 };
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
   };

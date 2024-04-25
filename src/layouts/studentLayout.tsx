@@ -1,21 +1,23 @@
 import React from "react";
-import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { BookOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 
 const { Header, Content, Sider } = Layout;
 
-const items2: MenuProps["items"] = [
+const STUDENT_LAYOUT: (ItemType & { path: string })[] = [
   {
     key: "1",
     icon: <BookOutlined />,
     label: "Đăng ký đề tài",
+    path: "/",
   },
   {
     key: "2",
     icon: <VerticalAlignTopOutlined />,
     label: "Nộp báo cáo khoá luận",
+    path: "/report",
   },
 ];
 
@@ -24,10 +26,18 @@ const StudentLayout: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const navigate = useNavigate();
+
   return (
     <Layout>
-      <Header style={{ display: "flex", alignItems: "center" }}>
+      <Header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
         <div className="demo-logo" />
+        <div className="text-white">Log out</div>
       </Header>
       <Content style={{ padding: "24px 48px" }}>
         <Layout
@@ -41,7 +51,10 @@ const StudentLayout: React.FC = () => {
               mode="inline"
               defaultSelectedKeys={["1"]}
               style={{ height: "100%" }}
-              items={items2}
+              items={STUDENT_LAYOUT.map((i) => ({
+                ...i,
+                onClick: () => navigate(i.path),
+              }))}
             />
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>

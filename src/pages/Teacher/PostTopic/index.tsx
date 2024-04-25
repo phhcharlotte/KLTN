@@ -93,15 +93,15 @@ const data: DataType[] = [
     accepted: 1,
   },
 ];
-const ListTopicPages: React.FC = () => {
+const Topics: React.FC = () => {
   return (
     <div className="container mx-auto">
       <p>Thời hạn đăng ký là: </p>
 
       <div className="flex gap-4 mt-8 ">
-        <Input placeholder="Nhập tên giáo viên" suffix={<SearchOutlined />} />
+        <Input placeholder="Basic usage" suffix={<SearchOutlined />} />
         <Button>Tìm Kiếm</Button>
-        <Button>Đăng ký đề tài</Button>
+        <Button>Đăng đề tài</Button>
       </div>
 
       <div className="mt-4">
@@ -111,4 +111,4 @@ const ListTopicPages: React.FC = () => {
   );
 };
 
-export default ListTopicPages;
+export default Topics;

@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Button, Input, Table } from "antd";
+import { Button, Table } from "antd";
 import type { TableProps } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import ModalRegisterTopic from "../../../components/modal/registerTopic";
 
-import { ListRegisterTopic } from "../../../types/Students";
-
-const columns: TableProps<ListRegisterTopic>["columns"] = [
+interface DataType {
+  key: string;
+  stt: string;
+  teacher_name: string;
+  khoa: string;
+  topic: string;
+  quanlity: number;
+  registered: number;
+  accepted: number;
+}
+const columns: TableProps<DataType>["columns"] = [
   {
     title: "MGV",
     dataIndex: "stt",
@@ -44,7 +50,7 @@ const columns: TableProps<ListRegisterTopic>["columns"] = [
     key: "accepted",
   },
 ];
-const data: ListRegisterTopic[] = [
+const data: DataType[] = [
   {
     key: "1",
     stt: "MGV",
@@ -86,35 +92,20 @@ const data: ListRegisterTopic[] = [
     accepted: 1,
   },
 ];
-const ListTopicPages: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-  const handleCloseModal = (value: boolean) => {
-    console.log(value);
-    setIsOpen(false);
-  };
+const ListTeacher: React.FC = () => {
   return (
     <div className="container mx-auto">
       <p>Thời hạn đăng ký là: </p>
 
       <div className="flex gap-4 mt-8 ">
-        <Input placeholder="Nhập tên giáo viên" suffix={<SearchOutlined />} />
-        <Button>Tìm Kiếm</Button>
-        <Button onClick={handleOpenModal}>Đăng ký đề tài</Button>
+        <Button>Tạo thời gian đăng ký đề tài</Button>
       </div>
 
       <div className="mt-4">
         <Table columns={columns} dataSource={data} />
       </div>
-      <ModalRegisterTopic
-        isModalOpen={isOpen}
-        handleCancle={handleCloseModal}
-      />
     </div>
   );
 };
 
-export default ListTopicPages;
+export default ListTeacher;

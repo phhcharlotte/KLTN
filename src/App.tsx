@@ -1,6 +1,6 @@
 // import LoginPage from "./pages/login";
 import ListTopicPages from "./pages/Student/ListTopic";
-import ReportKLTN from "./pages/Student/report";
+import ReportKLTN from "./pages/Student/Report";
 import StudentLayout from "./layouts/studentLayout";
 import "./App.css";
 import {

@@ -3,18 +3,9 @@ import React from "react";
 import { Button, Input, Table } from "antd";
 import type { TableProps } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { PostTopic } from "../../../types/Teacher";
 
-interface DataType {
-  key: string;
-  stt: string;
-  teacher_name: string;
-  khoa: string;
-  topic: string;
-  quanlity: number;
-  registered: number;
-  accepted: number;
-}
-const columns: TableProps<DataType>["columns"] = [
+const columns: TableProps<PostTopic>["columns"] = [
   {
     title: "MGV",
     dataIndex: "stt",
@@ -51,7 +42,7 @@ const columns: TableProps<DataType>["columns"] = [
     key: "accepted",
   },
 ];
-const data: DataType[] = [
+const data: PostTopic[] = [
   {
     key: "1",
     stt: "MGV",

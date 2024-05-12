@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, FormProps, Input, Modal } from "antd";
 
 type RegisterTopic = {
   isModalOpen: boolean;
-  handleCancle: (value: boolean) => void;
+  handleCancle: () => void;
 };
 
 type FieldType = {

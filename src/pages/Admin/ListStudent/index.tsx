@@ -1,17 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Table } from "antd";
 import type { TableProps } from "antd";
+import ModalPostTime from "../../../components/modal/postTime";
+import { ListStuden } from "../../../types/Admin";
 
-interface DataType {
-  key: string;
-  stt: string;
-  student_name: string;
-  khoa: string;
-  topic: string;
-  isRegisted: boolean;
-}
-const columns: TableProps<DataType>["columns"] = [
+const columns: TableProps<ListStuden>["columns"] = [
   {
     title: "MSV",
     dataIndex: "stt",
@@ -33,7 +27,7 @@ const columns: TableProps<DataType>["columns"] = [
     key: "isRegisted",
   },
 ];
-const data: DataType[] = [
+const data: ListStuden[] = [
   {
     key: "1",
     stt: "MGV",
@@ -68,17 +62,29 @@ const data: DataType[] = [
   },
 ];
 const ListStudent: React.FC = () => {
+  const [isOpenModal, setIsModalOpen] = useState<boolean>(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
   return (
     <div className="container mx-auto">
       <p>Thời hạn đăng ký là: </p>
 
       <div className="flex gap-4 mt-8 ">
-        <Button>Tạo thời gian đăng ký đề tài</Button>
+        <Button onClick={() => handleOpenModal}>
+          Tạo thời gian đăng ký đề tài
+        </Button>
       </div>
 
       <div className="mt-4">
         <Table columns={columns} dataSource={data} />
       </div>
+
+      <ModalPostTime
+        isModalPostTimeOpen={isOpenModal}
+        handleCancel={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };

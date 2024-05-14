@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, Form, FormProps, Input, Modal } from "antd";
+import { Button, Form, FormProps, Input, Modal } from "antd";
 
 type RegisterTopic = {
   isModalOpen: boolean;
@@ -9,10 +9,9 @@ type RegisterTopic = {
 type FieldType = {
   username?: string;
   password?: string;
-  remember?: string;
 };
 
-const ModalRegisterTopic: React.FC<RegisterTopic> = ({
+const ModalPostTopic: React.FC<RegisterTopic> = ({
   isModalOpen,
   handleCancle,
 }) => {
@@ -33,7 +32,7 @@ const ModalRegisterTopic: React.FC<RegisterTopic> = ({
         onCancel={handleCancle}
         closeIcon={false}
         footer={false}>
-        <p className="text-center text-xl font-bold mb-2">Đăng ký đề tài</p>
+        <p className="text-center text-xl font-bold mb-2">Đăng đề tài</p>
         <Form
           name="basic"
           labelCol={{ span: 8 }}
@@ -44,7 +43,7 @@ const ModalRegisterTopic: React.FC<RegisterTopic> = ({
           onFinishFailed={onFinishFailed}
           autoComplete="off">
           <Form.Item<FieldType>
-            label="Username"
+            label="Đề tài"
             name="username"
             rules={[
               { required: true, message: "Please input your username!" },
@@ -53,21 +52,13 @@ const ModalRegisterTopic: React.FC<RegisterTopic> = ({
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="Password"
+            label="Yêu cầu"
             name="password"
             rules={[
               { required: true, message: "Please input your password!" },
             ]}>
-            <Input.Password />
+            <Input />
           </Form.Item>
-
-          <Form.Item<FieldType>
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{ offset: 8, span: 16 }}>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" onClick={handleCancle}>
               Huỷ bỏ
@@ -82,4 +73,4 @@ const ModalRegisterTopic: React.FC<RegisterTopic> = ({
   );
 };
 
-export default ModalRegisterTopic;
+export default ModalPostTopic;

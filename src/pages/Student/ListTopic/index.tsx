@@ -92,9 +92,6 @@ const ListTopicPages: React.FC = () => {
   const handleOpenModal = () => {
     setIsOpen(true);
   };
-  // const handleCloseModal = () => {
-  //   setIsOpen(false);
-  // };
   return (
     <div className="container mx-auto">
       <p>Thời hạn đăng ký là: </p>

@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Layout, Menu, theme } from "antd";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { BookOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import ListTopicPages from "../pages/Student/ListTopic";
-import ReportKLTN from "../pages/Student/Report";
-import LoginPage from "../pages/login";
 
 const { Header, Content, Sider } = Layout;
 
@@ -30,19 +27,6 @@ const StudentLayout: React.FC = () => {
   } = theme.useToken();
 
   const navigate = useNavigate();
-
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAuthenticated(true);
-    }, 3000);
-  }, []);
-
-  if (!authenticated) {
-    return <LoginPage />;
-  }
-
   return (
     <Layout className="min-h-screen">
       <Header
@@ -54,8 +38,9 @@ const StudentLayout: React.FC = () => {
         <div className="demo-logo" />
         <div
           className="text-white"
+          style={{ cursor: "pointer" }}
           onClick={() => {
-            setAuthenticated(false);
+            navigate("/login");
           }}>
           Log out
         </div>
@@ -80,10 +65,7 @@ const StudentLayout: React.FC = () => {
             />
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            <Routes>
-              <Route path="/home" element={<ListTopicPages />} />
-              <Route path="/report" element={<ReportKLTN />} />
-            </Routes>
+            <Outlet />
           </Content>
         </Layout>
       </Content>

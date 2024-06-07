@@ -9,7 +9,7 @@ type FieldType = {
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    navigate("/dashboard");
+    navigate("/home");
     console.log("Success:", values);
   };
 
@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
   };
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card>
+      <Card className="pink">
         <h1 className="mb-4">Đăng Nhập </h1>
         <Form
           name="basic"

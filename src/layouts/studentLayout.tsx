@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { BookOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
 import { ItemType } from "antd/es/menu/hooks/useItems";
+import ListTopicPages from "../pages/Student/ListTopic";
+import ReportKLTN from "../pages/Student/Report";
+import LoginPage from "../pages/login";
 
 const { Header, Content, Sider } = Layout;
 
@@ -11,7 +14,7 @@ const STUDENT_LAYOUT: (ItemType & { path: string })[] = [
     key: "1",
     icon: <BookOutlined />,
     label: "Đăng ký đề tài",
-    path: "/",
+    path: "/home",
   },
   {
     key: "2",
@@ -28,8 +31,20 @@ const StudentLayout: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAuthenticated(true);
+    }, 3000);
+  }, []);
+
+  if (!authenticated) {
+    return <LoginPage />;
+  }
+
   return (
-    <Layout>
+    <Layout className="min-h-screen">
       <Header
         style={{
           display: "flex",
@@ -37,7 +52,13 @@ const StudentLayout: React.FC = () => {
           justifyContent: "space-between",
         }}>
         <div className="demo-logo" />
-        <div className="text-white">Log out</div>
+        <div
+          className="text-white"
+          onClick={() => {
+            setAuthenticated(false);
+          }}>
+          Log out
+        </div>
       </Header>
       <Content style={{ padding: "24px 48px" }}>
         <Layout
@@ -45,6 +66,7 @@ const StudentLayout: React.FC = () => {
             padding: "24px 0",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            height: "90%",
           }}>
           <Sider style={{ background: colorBgContainer }} width={250}>
             <Menu
@@ -58,7 +80,10 @@ const StudentLayout: React.FC = () => {
             />
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
-            <Outlet />
+            <Routes>
+              <Route path="/home" element={<ListTopicPages />} />
+              <Route path="/report" element={<ReportKLTN />} />
+            </Routes>
           </Content>
         </Layout>
       </Content>

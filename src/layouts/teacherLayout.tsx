@@ -21,7 +21,7 @@ const STUDENT_LAYOUT: (ItemType & { path: string })[] = [
   },
 ];
 
-const StudentLayout: React.FC = () => {
+const TeacherLayout: React.FC = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -73,4 +73,4 @@ const StudentLayout: React.FC = () => {
   );
 };
 
-export default StudentLayout;
+export default TeacherLayout;

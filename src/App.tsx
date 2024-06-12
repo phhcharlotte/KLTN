@@ -3,21 +3,19 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/login";
 import StudentLayout from "./layouts/studentLayout";
 import ListTopicPages from "./pages/Student/ListTopic";
-import ReportKLTN from "./pages/Student/report";
-import { useEffect, useState } from "react";
+import ReportKLTN from "./pages/Student/Report";
 
 function App() {
-  const user: string = "123";
+  // const user: string = "123";
   return (
     <>
       <Routes>
         <Route index element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        {!user ? (
-          <Route element={<StudentLayout />}>
-            <Route path="/home" element={<ListTopicPages />} />
-            <Route path="/report" element={<ReportKLTN />} />
-            {/* <Route
+        <Route path="/login" element={<LoginPage />} />(
+        <Route element={<StudentLayout />}>
+          <Route path="/home" element={<ListTopicPages />} />
+          <Route path="/report" element={<ReportKLTN />} />
+          {/* <Route
               path="/dashboard"
               element={
                 <ProtectedRoute
@@ -27,7 +25,7 @@ function App() {
                 </ProtectedRoute>
               }
             /> */}
-            {/* <Route
+          {/* <Route
               path="/admin"
               element={
                 <ProtectedRoute
@@ -47,9 +45,8 @@ function App() {
                 </ProtectedRoute>
               }
             /> */}
-          </Route>
-        ) : null}
-
+        </Route>
+        )
         <Route
           path="*"
           element={

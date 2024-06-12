@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Input, Table } from "antd";
 import type { TableProps } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { PostTopic } from "../../../types/Teacher";
+import ModalPostTopic from "../../../components/modal/postTopic";
 
 const columns: TableProps<PostTopic>["columns"] = [
   {
@@ -85,6 +86,11 @@ const data: PostTopic[] = [
   },
 ];
 const Topics: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
   return (
     <div className="container mx-auto">
       <p>Thời hạn đăng ký là: </p>
@@ -92,12 +98,17 @@ const Topics: React.FC = () => {
       <div className="flex gap-4 mt-8 ">
         <Input placeholder="Basic usage" suffix={<SearchOutlined />} />
         <Button>Tìm Kiếm</Button>
-        <Button>Đăng đề tài</Button>
+        <Button onClick={handleOpenModal}>Đăng đề tài</Button>
       </div>
 
       <div className="mt-4">
         <Table columns={columns} dataSource={data} />
       </div>
+
+      <ModalPostTopic
+        isModalOpen={isOpen}
+        handleCancle={() => setIsOpen(false)}
+      />
     </div>
   );
 };

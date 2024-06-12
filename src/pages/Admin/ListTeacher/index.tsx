@@ -35,19 +35,9 @@ const columns: TableProps<DataType>["columns"] = [
     key: "topic",
   },
   {
-    title: "Số lượng",
+    title: "Số lượng/ Đề tài",
     dataIndex: "quanlity",
     key: "quanlity",
-  },
-  {
-    title: "Đã đăng ký",
-    dataIndex: "registered",
-    key: "registered",
-  },
-  {
-    title: "Đã chấp nhận",
-    dataIndex: "accepted",
-    key: "accepted",
   },
 ];
 const data: DataType[] = [

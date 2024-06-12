@@ -12,7 +12,7 @@ const columns: TableProps<ListStuden>["columns"] = [
     key: "stt",
   },
   {
-    title: "Tên Giáo Viên",
+    title: "Tên Sinh Viên",
     dataIndex: "student_name",
     key: "student_name",
   },

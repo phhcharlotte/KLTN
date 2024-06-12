@@ -43,6 +43,11 @@ const columns: TableProps<ListRegisterTopic>["columns"] = [
     dataIndex: "accepted",
     key: "accepted",
   },
+  {
+    title: "Đã chấp nhận",
+    dataIndex: "accepted",
+    render: () => <Button type="primary">Đăng ký</Button>,
+  },
 ];
 const data: ListRegisterTopic[] = [
   {
@@ -97,12 +102,16 @@ const ListTopicPages: React.FC = () => {
       <p>Thời hạn đăng ký là: </p>
 
       <div className="flex gap-4 mt-8 ">
-        <Input placeholder="Nhập tên giáo viên" suffix={<SearchOutlined />} />
+        <Input
+          style={{ width: "30%" }}
+          placeholder="Nhập tên giáo viên"
+          suffix={<SearchOutlined />}
+        />
         <Button>Tìm Kiếm</Button>
         <Button onClick={handleOpenModal}>Đăng ký đề tài</Button>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 border-solid border-2 rounded-md">
         <Table columns={columns} dataSource={data} />
       </div>
       <ModalRegisterTopic

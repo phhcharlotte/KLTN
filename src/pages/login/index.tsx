@@ -1,61 +1,62 @@
-import type { FormProps } from "antd";
-import { Button, Form, Input, Card } from "antd";
-import React from "react";
+import { Button } from "antd";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-type FieldType = {
-  username?: string;
-  password?: string;
-};
-const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    navigate("/home");
-    console.log("Success:", values);
-  };
+import axiosClient from "../../apis";
+import Input from "../../components/input";
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo
-  ) => {
-    console.log("Failed:", errorInfo);
+const LoginPage: React.FC = () => {
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    setLoading(true);
+    const res = axiosClient.post("/login", {
+      username: userName,
+      password: password,
+    });
+    if (res?.user?.role === "admin") {
+      setLoading(false);
+      navigate("/home");
+    } else if (res?.user?.role === "student") {
+      setLoading(false);
+      navigate("/home");
+    } else {
+      setLoading(false);
+      navigate("/home");
+    }
   };
   return (
-    <div className="flex justify-center items-center h-screen">
-      <Card className="pink">
+    <div className="flex justify-center items-center h-screen w-full">
+      <div className="w-96 h-96 p-4 flex flex-col justify-center items-center rounded-xl border-solid border-2">
         <h1 className="mb-4">Đăng Nhập </h1>
-        <Form
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off">
-          <Form.Item<FieldType>
-            label="Username"
-            name="username"
-            rules={[
-              { required: true, message: "Please input your username!" },
-            ]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item<FieldType>
-            label="Password"
-            name="password"
-            rules={[
-              { required: true, message: "Please input your password!" },
-            ]}>
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Đăng nhập
+        <form className="form">
+          <div className="form-item">
+            <label>Tên đăng nhập</label>
+            <Input
+              value={userName}
+              onChange={(value) => setUserName(value)}
+              placeholder="Tên đăng nhập"
+            />
+          </div>
+          <div className="form-item">
+            <label>Mật khẩu</label>
+            <Input
+              value={password}
+              onChange={(value) => setPassword(value)}
+              placeholder="Mật khẩu"
+              type="password"
+            />
+          </div>
+          <div className="text-center w-full mt-10">
+            <Button type="primary" loading={loading} onClick={handleSubmit}>
+              Đăng Nhập
             </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

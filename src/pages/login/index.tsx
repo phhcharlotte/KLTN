@@ -10,10 +10,10 @@ const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
-    const res = axiosClient.post("/login", {
+    const res = await axiosClient.post("/login", {
       username: userName,
       password: password,
     });

@@ -40,6 +40,7 @@ const StudentLayout: React.FC = () => {
           className="text-white"
           style={{ cursor: "pointer" }}
           onClick={() => {
+            localStorage.removeItem("token");
             navigate("/login");
           }}>
           Log out

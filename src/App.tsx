@@ -4,14 +4,26 @@ import LoginPage from "./pages/login";
 import StudentLayout from "./layouts/studentLayout";
 import ListTopicPages from "./pages/Student/ListTopic";
 import ReportKLTN from "./pages/Student/Report";
+import AdminLayout from "./layouts/adminLayout";
+import TeacherLayout from "./layouts/teacherLayout";
+import ListStudent from "./pages/Admin/ListStudent";
+import ListTeacher from "./pages/Admin/ListTeacher";
+import Topics from "./pages/Teacher/PostTopic";
 
 function App() {
-  // const user: string = "123";
   return (
     <>
       <Routes>
         <Route index element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />(
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<AdminLayout />}>
+          <Route path="/list-student" element={<ListStudent />} />
+          <Route path="/list-teacher" element={<ListTeacher />} />
+        </Route>
+        <Route element={<TeacherLayout />}>
+          <Route path="/list-topic" element={<Topics />} />
+          <Route path="/report" element={<ReportKLTN />} />
+        </Route>
         <Route element={<StudentLayout />}>
           <Route path="/home" element={<ListTopicPages />} />
           <Route path="/report" element={<ReportKLTN />} />
@@ -46,7 +58,6 @@ function App() {
               }
             /> */}
         </Route>
-        )
         <Route
           path="*"
           element={

@@ -22,7 +22,17 @@ const columns: TableProps<ListStuden>["columns"] = [
     key: "khoa",
   },
   {
+    title: "Đề tài",
+    dataIndex: "khoa",
+    key: "khoa",
+  },
+  {
     title: "Đã đăng ký",
+    dataIndex: "isRegisted",
+    key: "isRegisted",
+  },
+  {
+    title: "Chấp nhận được bảo vệ",
     dataIndex: "isRegisted",
     key: "isRegisted",
   },

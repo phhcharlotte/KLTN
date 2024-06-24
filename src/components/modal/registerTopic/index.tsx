@@ -25,21 +25,16 @@ const ModalRegisterTopic: React.FC<RegisterTopic> = ({
         <p className="text-center text-xl font-bold mb-2">Đăng ký đề tài</p>
         <form className="form">
           <div className="form-item">
-            <label>Tên đăng nhập</label>
-            <Input
-              value={userName}
-              onChange={(value) => setUserName(value)}
-              placeholder="Tên đăng nhập"
-            />
+            <label>Tên giáo viên</label>
+            <Input value={userName} onChange={(value) => setUserName(value)} />
           </div>
           <div className="form-item">
-            <label>Mật khẩu</label>
-            <Input
-              value={password}
-              onChange={(value) => setPassword(value)}
-              placeholder="Mật khẩu"
-              type="password"
-            />
+            <label>Đề tài</label>
+            <Input value={password} onChange={(value) => setPassword(value)} />
+          </div>
+          <div className="form-item">
+            <label>Mô tả</label>
+            <Input value={password} onChange={(value) => setPassword(value)} />
           </div>
           <div className="text-center w-full mt-10">
             <Button type="primary" onClick={handleCancle}>

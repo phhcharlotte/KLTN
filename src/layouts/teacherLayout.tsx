@@ -6,12 +6,12 @@ import { ItemType } from "antd/es/menu/hooks/useItems";
 
 const { Header, Content, Sider } = Layout;
 
-const STUDENT_LAYOUT: (ItemType & { path: string })[] = [
+const TEACHER_LAYOUT: (ItemType & { path: string })[] = [
   {
     key: "1",
     icon: <BookOutlined />,
-    label: "Đăng ký đề tài",
-    path: "/home",
+    label: "Danh sách đề tài",
+    path: "/list-topic",
   },
   {
     key: "2",
@@ -40,6 +40,7 @@ const TeacherLayout: React.FC = () => {
           className="text-white"
           style={{ cursor: "pointer" }}
           onClick={() => {
+            localStorage.removeItem("token");
             navigate("/login");
           }}>
           Log out
@@ -58,7 +59,7 @@ const TeacherLayout: React.FC = () => {
               mode="inline"
               defaultSelectedKeys={["1"]}
               style={{ height: "100%" }}
-              items={STUDENT_LAYOUT.map((i) => ({
+              items={TEACHER_LAYOUT.map((i) => ({
                 ...i,
                 onClick: () => navigate(i.path),
               }))}

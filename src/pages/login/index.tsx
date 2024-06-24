@@ -7,25 +7,33 @@ import Input from "../../components/input";
 const LoginPage: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
-    const res = await axiosClient.post("/login", {
-      username: userName,
-      password: password,
-    });
-    if (res?.user?.role === "admin") {
+    try {
+      const res = await axiosClient.post("/login", {
+        username: userName,
+        password: password,
+      });
+      localStorage.setItem("token", res?.data?.token);
+      if (res?.data?.user?.role === "admin") {
+        setLoading(false);
+        navigate("/list-student");
+      } else if (res?.data?.user?.role === "student") {
+        setLoading(false);
+        navigate("/home");
+      } else {
+        setLoading(false);
+        navigate("/list-topic");
+      }
+    } catch (error: any) {
+      setError(error.response.data.msg);
+    } finally {
       setLoading(false);
-      navigate("/home");
-    } else if (res?.user?.role === "student") {
-      setLoading(false);
-      navigate("/home");
-    } else {
-      setLoading(false);
-      navigate("/home");
     }
   };
   return (
@@ -49,6 +57,9 @@ const LoginPage: React.FC = () => {
               placeholder="Mật khẩu"
               type="password"
             />
+          </div>
+          <div className="form-item">
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
           <div className="text-center w-full mt-10">
             <Button type="primary" loading={loading} onClick={handleSubmit}>

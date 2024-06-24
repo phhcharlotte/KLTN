@@ -1,16 +1,10 @@
-import { useRoutes } from "react-router-dom";
-import LoginPage from "../pages/login";
-export default function App() {
-  const routes = useRoutes([
-    {
-      path: "/login",
-      index: true,
-      element: <LoginPage />,
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
-  ]);
-  return routes;
-}
+// PrivateRoute.js
+import React from "react";
+import { Navigate } from "react-router-dom";
+
+const PrivateRoute = ({ children }: any) => {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/login" />;
+};
+
+export default PrivateRoute;
